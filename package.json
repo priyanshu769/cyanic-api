@@ -1,0 +1,14 @@
+{
+  "name": "cyanic-api",
+  "version": "1.0.0",
+  "description": "API for Cyanic",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Priyanshu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
