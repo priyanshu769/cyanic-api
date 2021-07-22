@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const {extend} = require('lodash')
 
 // const videos = [
 //     {
@@ -175,5 +176,36 @@ router
       })
     }
   })
+
+router.param('id', async (req, res, next, id) => {
+  try {
+    const video = await Video.findById(id)
+    if (!video) {
+      return res.json({
+        success: false,
+        message: 'No video found with this Id',
+      })
+    }
+    req.video = video
+    next()
+  } catch (error) {
+    res.json({
+      success: false,
+      message: 'Error while retrieving video',
+      errorMessage: error.message,
+    })
+  }
+})
+router.route('/:id').get((req, res) => {
+  let video = req.video
+  res.json({ success: false, video })
+})
+.post(async(req, res)=> {
+    const updateVideo = req.body
+    let video = req.video
+    video = extend(video, updateVideo)
+    video = await video.save()
+    res.json({success: true, video})
+})
 
 module.exports = router
