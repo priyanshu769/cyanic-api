@@ -16,6 +16,12 @@ const UserSchema = new mongoose.Schema({
     playlists: {
         type: Array,
 
+    },
+    likeVideos: {
+        type: Array
+    },
+    watchLater: {
+        type: Array
     }
 })
 const User = mongoose.model('User', UserSchema)
