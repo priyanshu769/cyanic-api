@@ -11,8 +11,10 @@ initializeDBConnect()
 
 // Routers
 const videos = require('./routers/videos.v1.router')
+const users = require('./routers/users.v1.router')
 
 app.use('/videos', videos)
+app.use('/users', users)
 
 app.get('/', (req, res) => {
   res.send("Hello! I'm Cyanic API.")
