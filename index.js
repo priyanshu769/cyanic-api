@@ -5,6 +5,10 @@ const app = express()
 
 app.use(bodyParser.json())
 
+// Middlewares
+const errorHandler404 = require('./middlewares/errorHandler404.middleware')
+const errorHandler500 = require('./middlewares/errorHandler500.middleware')
+
 // DB Connect
 const initializeDBConnect = require('./db/db.connect')
 initializeDBConnect()
@@ -19,6 +23,9 @@ app.use('/users', users)
 app.get('/', (req, res) => {
   res.send("Hello! I'm Cyanic API.")
 })
+
+app.use(errorHandler404)
+app.use(errorHandler500)
 
 app.listen(3000, () => {
   console.log('Server running on port 3000...')
