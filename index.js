@@ -1,9 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 
 app.use(bodyParser.json())
+appuse(cors())
 
 // Middlewares
 const errorHandler404 = require('./middlewares/errorHandler404.middleware')
