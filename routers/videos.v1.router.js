@@ -58,7 +58,7 @@ router
   .route('/:id')
   .get((req, res) => {
     let video = req.video
-    res.json({ success: false, video })
+    res.json({ success: true, video })
   })
   .post(async (req, res) => {
     const updateVideo = req.body
