@@ -3,26 +3,24 @@ const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: "Cannot add a user without name"
+        required: "Cannot create account without name"
     },
     email: {
         type: String,
-        required: "Cannot add a user without a valid email address"
+        required: "Cannot create account without a valid email address"
     },
     password: {
         type: String,
-        required: "Cannot add a user without password"
+        min: 6,
+        required: "Cannot create account without password"
     },
-    playlists: {
-        type: Array,
-
-    },
-    likeVideos: {
-        type: Array
+    likedVideos: {
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Video"}]
     },
     watchLater: {
-        type: Array
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Video"}]
     }
 })
+
 const User = mongoose.model('User', UserSchema)
 module.exports = User

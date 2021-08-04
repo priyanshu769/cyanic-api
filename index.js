@@ -17,10 +17,16 @@ initializeDBConnect()
 
 // Routers
 const videos = require('./routers/videos.v1.router')
-const users = require('./routers/users.v1.router')
+const user = require('./routers/user.v1.router')
+const login = require('./routers/login.router')
+const signup = require('./routers/signup.router')
+const playlists = require('./routers/playlists.router')
 
 app.use('/videos', videos)
-app.use('/users', users)
+app.use('/user', user)
+app.use('/login', login)
+app.use('/signup', signup)
+app.use('/playlists', playlists)
 
 app.get('/', (req, res) => {
   res.send("Hello! I'm Cyanic API.")
@@ -29,6 +35,8 @@ app.get('/', (req, res) => {
 app.use(errorHandler404)
 app.use(errorHandler500)
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000...')
+const PORT = 8000
+
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server running on port ${PORT}...`)
 })
