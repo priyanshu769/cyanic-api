@@ -15,7 +15,7 @@ router.route('/').get(async (req, res) => {
     if (userId) {
       const user = await User.findById(userId).populate("likedVideos").populate("watchLater").exec()
       const { password, __v, ...restUserData } = user._doc
-      res.json({ succcess: true, user: restUserData })
+      res.json({ success: true, user: restUserData })
     }
   } catch (error) {
     res.json({
