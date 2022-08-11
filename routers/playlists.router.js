@@ -43,7 +43,7 @@ router.param('playlistId', async (req, res, next, playlistId) => {
   try {
     const playlist = await Playlist.findById(playlistId)
     if (!playlist) {
-      rs.json({ success: false, message: 'No playlist found with this Id.' })
+      res.json({ success: false, message: 'No playlist found with this Id.' })
     }
     if (playlist.userId === req.userId) {
       req.playlist = playlist
@@ -70,6 +70,10 @@ router.route('/:playlistId/addRemoveVideo').post(async (req, res) => {
   } else await playlist.updateOne({ $push: { videos: videoId } })
   res.json({ success: true, message: "Playlist updated." })
 })
-
+router.route('/:playlistId/delete').post(async (req, res) => {
+  const playlistId = req.playlist._id
+  const playlistDeleted = await Playlist.findOneAndDelete({_id: playlistId})
+  res.json({ success: true, message: "Playlist updated.", playlistDeleted })
+})
 
 module.exports = router
